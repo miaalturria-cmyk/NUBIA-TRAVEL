@@ -1,0 +1,722 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA TRAVEL | Tu próxima aventura</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --navy:#183c5b;
+  --blue:#398fc5;
+  --sky:#eaf7ff;
+  --lilac:#f1edff;
+  --white:#fff;
+  --ink:#193750;
+  --muted:#71879a;
+  --line:#dcebf4;
+  --shadow:0 15px 40px rgba(43,105,145,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{margin:0;background:#fbfdff;color:var(--ink);font-family:"DM Sans",sans-serif}
+h1,h2,h3,.logo{font-family:"Manrope",sans-serif}
+h1{font-size:clamp(40px,6vw,76px);line-height:1.08;letter-spacing:-3px}
+h2{font-size:clamp(27px,4vw,42px);letter-spacing:-1.5px}
+p{color:var(--muted);line-height:1.7}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9bdcff;outline-offset:3px}
+.announcement{padding:10px;text-align:center;background:var(--navy);color:white;font-size:10px;font-weight:800;letter-spacing:2px}
+header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 6%;background:#ffffffed;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.logo{font-size:22px;font-weight:800;white-space:nowrap;color:var(--navy)}
+.logo span{color:var(--blue)}
+nav{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;font-weight:700;color:#577186}
+nav a:hover{color:var(--blue)}
+.hero{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:45px;min-height:560px;padding:70px 8%;overflow:hidden;background:linear-gradient(120deg,#f4fbff,#eaf7ff 55%,#f5f0ff)}
+.hero-text{position:relative;z-index:2}
+.hero h1 em{color:var(--blue);font-style:normal}
+.tag{color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px}
+.hero-image{position:relative;padding:15px}
+.hero-image img{display:block;width:100%;height:380px;object-fit:cover;border:8px solid white;border-radius:180px 180px 25px 25px;box-shadow:var(--shadow);transform:rotate(2deg)}
+.floating-card{position:absolute;bottom:35px;left:-12px;padding:16px 20px;border-radius:15px;background:white;box-shadow:var(--shadow);font-size:13px;font-weight:700}
+.plane{position:absolute;top:32px;left:-50px;color:var(--blue);font-size:32px;animation:fly 15s linear infinite}
+.cloud{position:absolute;color:#fff;font-size:55px;opacity:.8;animation:float 7s ease-in-out infinite}
+.cloud.one{top:18%;right:8%}.cloud.two{bottom:8%;left:4%;animation-delay:2s}
+@keyframes fly{from{left:-50px}to{left:110%}}
+@keyframes float{50%{transform:translateY(-13px)}}
+.button{display:inline-flex;justify-content:center;align-items:center;gap:10px;margin-top:10px;padding:14px 20px;border:0;border-radius:12px;background:linear-gradient(135deg,#2e83b8,#50b5e1);color:white;font-size:12px;font-weight:800;box-shadow:0 8px 20px #c8e8f6;transition:.2s}
+.button:hover{transform:translateY(-3px);box-shadow:0 12px 24px #bddced}
+.section{padding:72px 8%}
+.flight-section{position:relative;width:90%;margin:-25px auto 0;padding:32px;border:1px solid var(--line);border-radius:24px;background:white;box-shadow:var(--shadow)}
+.flight-section h2{margin-bottom:5px}
+.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+label{display:flex;flex-direction:column;gap:8px;color:#5b778c;font-size:12px;font-weight:700}
+input,select{width:100%;min-width:0;padding:12px;border:1px solid var(--line);border-radius:10px;outline:none;background:#fbfdff;color:var(--ink)}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #e4f5ff}
+small{color:var(--muted)}
+.results{display:grid;gap:12px;margin-top:20px}
+.result{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:17px;border:1px solid var(--line);border-radius:14px;background:var(--sky)}
+.result small{display:block;margin-top:5px}
+.country-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0}
+.country-tab{padding:12px 18px;border:1px solid var(--line);border-radius:25px;background:white;color:var(--ink);font-size:12px;font-weight:700}
+.country-tab.active,.country-tab:hover{background:var(--navy);color:white}
+.country-feature{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:white;box-shadow:var(--shadow)}
+.country-image img{display:block;width:100%;height:100%;min-height:300px;object-fit:cover}
+.country-info{display:flex;flex-direction:column;justify-content:center;padding:30px}
+.country-info h3{margin:12px 0;font-size:30px}
+.country-info p{font-size:13px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}
+.fact{padding:13px;border-radius:12px;background:var(--sky)}
+.fact small,.fact strong{display:block}
+.fact strong{margin-top:5px;font-size:12px}
+.products-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:60px 0 25px}
+.products-heading input{max-width:260px}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.product-card{overflow:hidden;border:1px solid var(--line);border-radius:17px;background:white;transition:.2s}
+.product-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.product-image{height:145px;overflow:hidden;background:var(--sky);display:flex;align-items:center;justify-content:center}
+.product-image img{width:100%;height:100%;object-fit:cover}
+.product-emoji{font-size:55px}
+.product-body{padding:16px}
+.product-body h3{margin:8px 0;font-size:16px}
+.product-body p{min-height:40px;font-size:12px}
+.product-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.product-price{color:var(--blue);font-weight:800}
+.add-button{width:35px;height:35px;border:0;border-radius:50%;background:var(--sky);color:var(--blue);font-size:22px}
+.trip-section{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start;background:linear-gradient(130deg,#edf9ff,#f4f0ff)}
+.trip-form{display:grid;gap:17px;padding:28px;border:1px solid var(--line);border-radius:22px;background:white;box-shadow:var(--shadow)}
+.total{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px;border-radius:13px;background:var(--sky)}
+.total span{font-size:10px;font-weight:800}
+.total strong{color:var(--blue);font-size:20px}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}
+.tool-card{display:flex;flex-direction:column;gap:15px;padding:23px;border:1px solid var(--line);border-radius:20px;background:white;box-shadow:0 10px 30px #2b69910f}
+.tool-card h3{margin:0;font-size:19px}
+.tool-card p{margin:0;font-size:12px}
+.tool-card .button{width:100%}
+.packing-item{display:flex;flex-direction:row;align-items:center;gap:10px;padding:7px 0;font-size:12px}
+.packing-item input{width:auto}
+.packing-item.checked span{text-decoration:line-through;color:#8da2b1}
+.countdown{padding:12px;border-radius:10px;background:var(--lilac);text-align:center}
+.countdown strong{color:var(--blue);font-size:24px}
+.cart-items{display:grid;gap:12px;margin:25px 0}
+.cart-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px;border:1px solid var(--line);border-radius:15px;background:white}
+.cart-row h4{margin:0 0 6px}
+.cart-controls{display:flex;align-items:center;gap:9px;margin-top:10px}
+.cart-controls button{border:1px solid var(--line);border-radius:7px;background:var(--sky);color:var(--navy);padding:4px 9px}
+.cart-controls .remove{background:white;color:#b04b64}
+.cart-total{display:flex;justify-content:space-between;max-width:420px;padding:20px;border-radius:14px;background:var(--sky);font-size:18px}
+.cart-total strong{color:var(--blue)}
+footer{padding:45px 8%;background:var(--navy);color:white;text-align:center}
+footer .logo{color:white}
+footer p,footer small{color:#c5dbea}
+.toast{position:fixed;bottom:20px;right:20px;z-index:20;max-width:calc(100% - 40px);padding:15px 20px;border-radius:12px;background:var(--navy);color:white;box-shadow:var(--shadow);opacity:0;transform:translateY(15px);pointer-events:none;transition:.25s}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+ header{flex-direction:column}
+ nav{justify-content:center}
+ .hero{grid-template-columns:1fr;padding:55px 7%}
+ .hero-image img{height:330px}
+ .country-feature,.trip-section{grid-template-columns:1fr}
+ .product-grid{grid-template-columns:repeat(2,1fr)}
+ .tools-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+ header{padding:17px}
+ nav{gap:12px;font-size:11px}
+ .hero{gap:20px}
+ .hero h1{letter-spacing:-2px}
+ .section{padding:48px 6%}
+ .flight-section{width:92%;padding:21px}
+ .form-grid,.tools-grid{grid-template-columns:1fr}
+ .products-heading{flex-direction:column;align-items:stretch}
+ .products-heading input{max-width:none}
+ .product-grid{gap:10px}
+ .product-image{height:110px}
+ .product-body{padding:12px}
+ .product-body h3{font-size:14px}
+ .country-info{padding:22px}
+ .country-info h3{font-size:25px}
+ .result,.cart-row{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="announcement">✈ TU PRÓXIMA AVENTURA EMPIEZA ACÁ ✈</div>
+
+<header>
+  <a class="logo" href="#inicio">✈ NOVA <span>TRAVEL</span></a>
+  <nav>
+    <a href="#vuelos">Vuelos</a>
+    <a href="#destinos">Destinos</a>
+    <a href="#mi-viaje">Mi viaje</a>
+    <a href="#herramientas">Organizá tu viaje</a>
+    <a href="#carrito">Carrito (<span id="cartCount">0</span>)</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <span class="cloud one">☁</span>
+  <span class="cloud two">☁</span>
+  <div class="plane">✈</div>
+  <div class="hero-text">
+    <span class="tag">EL MUNDO TE ESTÁ ESPERANDO</span>
+    <h1>Hay todo un mundo <em>esperándote.</em></h1>
+    <p>Descubrí lugares increíbles, buscá vuelos y prepará el viaje de tus sueños con NOVA TRAVEL.</p>
+    <a class="button" href="#vuelos">Encontrar mi viaje ↗</a>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85" alt="Paisaje de montaña">
+    <div class="floating-card">☁️ Tu próxima aventura te espera</div>
+  </div>
+</section>
+
+<section class="section flight-section" id="vuelos">
+  <span class="tag">PLANIFICÁ TU PRÓXIMO VUELO</span>
+  <h2>¿A dónde vamos?</h2>
+  <p>Completá los datos para descubrir opciones de ejemplo.</p>
+  <form id="flightForm" class="form-grid">
+    <label>Origen
+      <input id="origin" value="Buenos Aires" required>
+    </label>
+    <label>Destino
+      <input id="destination" placeholder="Ej. Tokio" required>
+    </label>
+    <label>Fecha de ida
+      <input id="departure" type="date" required>
+    </label>
+    <label>Fecha de vuelta
+      <input id="returnDate" type="date">
+    </label>
+    <label>Pasajeros
+      <select id="passengers">
+        <option value="1">1 pasajero</option>
+        <option value="2" selected>2 pasajeros</option>
+        <option value="3">3 pasajeros</option>
+        <option value="4">4 pasajeros</option>
+        <option value="5">5 pasajeros</option>
+      </select>
+    </label>
+    <button class="button" type="submit">Buscar vuelos ↗</button>
+  </form>
+  <div id="flightResults" class="results"></div>
+  <small>* Los vuelos y precios son ilustrativos; no se realizan reservas reales.</small>
+</section>
+
+<section class="section" id="destinos">
+  <span class="tag">DESCUBRÍ EL MUNDO</span>
+  <h2>Elegí tu próximo destino.</h2>
+  <p>Seleccioná un país para conocerlo y descubrir sus recuerdos típicos.</p>
+  <div class="country-tabs">
+    <button class="country-tab active" data-country="japon">🇯🇵 Japón</button>
+    <button class="country-tab" data-country="italia">🇮🇹 Italia</button>
+    <button class="country-tab" data-country="brasil">🇧🇷 Brasil</button>
+    <button class="country-tab" data-country="francia">🇫🇷 Francia</button>
+    <button class="country-tab" data-country="argentina">🇦🇷 Argentina</button>
+  </div>
+  <div id="countryFeature" class="country-feature"></div>
+
+  <div class="products-heading">
+    <div>
+      <span class="tag">RECUERDOS DEL MUNDO</span>
+      <h2>Un pedacito de cada lugar.</h2>
+    </div>
+    <input id="giftSearch" placeholder="Buscar recuerdos...">
+  </div>
+  <div id="giftGrid" class="product-grid"></div>
+</section>
+
+<section class="section trip-section" id="mi-viaje">
+  <div>
+    <span class="tag">DISEÑADO POR VOS</span>
+    <h2>Tu viaje, tus reglas.</h2>
+    <p>Elegí tus opciones y calculá cuánto podría costar tu aventura.</p>
+    <p>✦ Elegí el destino.<br>✦ Personalizá tu alojamiento.<br>✦ Sumá actividades.<br>✦ Agregá tu paquete al carrito.</p>
+  </div>
+  <form id="tripForm" class="trip-form">
+    <label>Destino
+      <select id="tripDestination">
+        <option>Japón</option><option>Italia</option><option>Brasil</option><option>Francia</option><option>Argentina</option>
+      </select>
+    </label>
+    <label>Vuelo
+      <select id="flightType">
+        <option value="850000">Económico — $850.000</option>
+        <option value="1450000">Confort — $1.450.000</option>
+        <option value="2600000">Premium — $2.600.000</option>
+      </select>
+    </label>
+    <label>Alojamiento por noche
+      <select id="hotelType">
+        <option value="65000">Hotel boutique — $65.000</option>
+        <option value="38000">Hostel — $38.000</option>
+        <option value="115000">Hotel premium — $115.000</option>
+      </select>
+    </label>
+    <label>Cantidad de noches
+      <input id="nights" type="number" min="1" max="30" value="7">
+    </label>
+    <label>Actividad
+      <select id="activityType">
+        <option value="45000">Tour cultural — $45.000</option>
+        <option value="70000">Aventura — $70.000</option>
+        <option value="35000">Ruta gastronómica — $35.000</option>
+        <option value="0">Explorar por mi cuenta — Gratis</option>
+      </select>
+    </label>
+    <div class="total"><span>PRECIO TOTAL ESTIMADO</span><strong id="tripTotal">$1.350.000</strong></div>
+    <button class="button" type="submit">Agregar paquete al carrito ＋</button>
+  </form>
+</section>
+
+<section class="section" id="herramientas">
+  <span class="tag">PREPARÁ LA AVENTURA</span>
+  <h2>Organizá tu viaje.</h2>
+  <p>Herramientas para preparar cada detalle antes de salir.</p>
+  <div class="tools-grid">
+    <article class="tool-card">
+      <h3>🧳 Tu lista de valija</h3>
+      <p>Elegí el clima y prepará tu lista de equipaje.</p>
+      <label>Clima
+        <select id="weather">
+          <option value="calor">Caluroso</option>
+          <option value="frio">Frío</option>
+          <option value="lluvia">Lluvioso</option>
+          <option value="templado">Templado</option>
+        </select>
+      </label>
+      <label>Días de viaje
+        <input id="packDays" type="number" min="1" max="60" value="7">
+      </label>
+      <button class="button" id="makePacking" type="button">Preparar lista</button>
+      <div id="packingList"></div>
+    </article>
+
+    <article class="tool-card">
+      <h3>💸 Calculadora de gastos</h3>
+      <p>Sumá tus gastos para calcular un presupuesto aproximado.</p>
+      <label>Alojamiento ($)<input class="budget-input" id="budgetHotel" type="number" min="0" value="250000"></label>
+      <label>Comida ($)<input class="budget-input" id="budgetFood" type="number" min="0" value="120000"></label>
+      <label>Transporte ($)<input class="budget-input" id="budgetTransport" type="number" min="0" value="60000"></label>
+      <label>Excursiones ($)<input class="budget-input" id="budgetActivities" type="number" min="0" value="90000"></label>
+      <div class="total"><span>PRESUPUESTO TOTAL</span><strong id="budgetTotal">$520.000</strong></div>
+    </article>
+
+    <article class="tool-card">
+      <h3>⏳ Cuenta regresiva</h3>
+      <p>Elegí la fecha de salida y contá los días que faltan.</p>
+      <label>Fecha de salida<input id="countdownDate" type="date"></label>
+      <div id="countdownMessage">¡Tu próxima aventura te espera! ✨</div>
+      <div class="countdown"><strong id="countDays">--</strong> días</div>
+      <div class="countdown"><strong id="countHours">--</strong> horas</div>
+      <div class="countdown"><strong id="countMinutes">--</strong> minutos</div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="carrito">
+  <span class="tag">TUS FAVORITOS</span>
+  <h2>Tu carrito viajero.</h2>
+  <p>Revisá los recuerdos y paquetes que elegiste.</p>
+  <div id="cartItems" class="cart-items"><p>Tu carrito está vacío. ¡Explorá los destinos!</p></div>
+  <div class="cart-total">Total: <strong id="summaryTotal">$0</strong></div>
+  <button class="button" id="checkoutButton">Continuar</button>
+  <p id="cartMessage" role="status"></p>
+  <small>Simulación escolar. No se procesan pagos reales.</small>
+</section>
+</main>
+
+<footer>
+  <a class="logo" href="#inicio">✈ NOVA <span>TRAVEL</span></a>
+  <p>El mundo está lleno de lugares por descubrir. ¿A dónde vamos?</p>
+  <p>Instagram · Contacto · Preguntas frecuentes</p>
+  <small>© 2026 NOVA TRAVEL · Proyecto educativo</small>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const money = value => "$" + Math.round(value).toLocaleString("es-AR");
+
+let cart = [];
+let currentCountry = "japon";
+let toastTimer;
+
+const countries = {
+  japon:{
+    name:"Japón",flag:"🇯🇵",city:"Tokio y Kioto",food:"Sushi y ramen",
+    description:"Un lugar donde la tradición y la tecnología se encuentran. Descubrí templos, jardines, luces y una cultura fascinante.",
+    gift:"Abanicos y recuerdos tradicionales",
+    image:"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80",
+    gifts:[
+      ["Abanico japonés","Un recuerdo lleno de color.","🎐",12000],
+      ["Taza de té","Inspirada en la tradición japonesa.","🍵",18000],
+      ["Amuleto decorativo","Un pequeño recuerdo cultural.","🧿",9000],
+      ["Dulces japoneses","Sabores para descubrir.","🍡",7500]
+    ]
+  },
+  italia:{
+    name:"Italia",flag:"🇮🇹",city:"Roma y Florencia",food:"Pasta y pizza",
+    description:"Calles históricas, plazas increíbles, arte, arquitectura y sabores que hacen de Italia un destino inolvidable.",
+    gift:"Cerámica y recuerdos artesanales",
+    image:"https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=900&q=80",
+    gifts:[
+      ["Taza italiana","Ideal para recordar tu viaje.","☕",14000],
+      ["Pasta artesanal","Un clásico de la gastronomía.","🍝",8000],
+      ["Postal de Roma","Una imagen para guardar.","🏛️",3500],
+      ["Imán de Italia","Un pequeño recuerdo.","🧲",4500]
+    ]
+  },
+  brasil:{
+    name:"Brasil",flag:"🇧🇷",city:"Río de Janeiro",food:"Feijoada y pão de queijo",
+    description:"Playas, naturaleza, música y una energía única. Brasil invita a disfrutar de paisajes tropicales y días de aventura.",
+    gift:"Artesanías y recuerdos coloridos",
+    image:"https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=900&q=80",
+    gifts:[
+      ["Pulsera de colores","Un recuerdo alegre y tropical.","📿",6000],
+      ["Bolso de playa","Práctico para los días de sol.","👜",16000],
+      ["Taza de Brasil","Un recuerdo para todos los días.","☕",11000],
+      ["Postal de Río","Guardá el paisaje en una postal.","🌴",3500]
+    ]
+  },
+  francia:{
+    name:"Francia",flag:"🇫🇷",city:"París",food:"Croissants y macarons",
+    description:"Arte, museos, cafeterías y monumentos famosos. París es ideal para quienes disfrutan la cultura y los paseos urbanos.",
+    gift:"Postales y recuerdos parisinos",
+    image:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80",
+    gifts:[
+      ["Postal de París","Un recuerdo de la ciudad.","🗼",3500],
+      ["Taza parisina","Para recordar tu aventura.","☕",13000],
+      ["Macarons decorativos","Inspirados en la pastelería francesa.","🍬",7000],
+      ["Llavero de Francia","Pequeño y fácil de llevar.","🔑",5000]
+    ]
+  },
+  argentina:{
+    name:"Argentina",flag:"🇦🇷",city:"Bariloche",food:"Asado y alfajores",
+    description:"Montañas, lagos, bosques y paisajes increíbles. Un destino perfecto para descubrir la naturaleza y disfrutar de la aventura.",
+    gift:"Artesanías y productos regionales",
+    image:"https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=900&q=80",
+    gifts:[
+      ["Alfajores regionales","Un clásico para compartir.","🍫",6500],
+      ["Mate artesanal","Un recuerdo bien argentino.","🧉",15000],
+      ["Postal patagónica","Paisajes para guardar.","🏔️",3500],
+      ["Llavero de Bariloche","Un recuerdo de la Patagonia.","🔑",4500]
+    ]
+  }
+};
+
+function notify(message){
+  const toast=$("toast");
+  toast.textContent=message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove("show"),2800);
+}
+
+function renderCountry(key){
+  currentCountry=key;
+  const c=countries[key];
+
+  $("countryFeature").innerHTML=`
+    <div class="country-image"><img src="${c.image}" alt="Paisaje de ${c.name}"></div>
+    <div class="country-info">
+      <span class="tag">${c.flag} CONOCÉ EL DESTINO</span>
+      <h3>${c.name}</h3>
+      <p>${c.description}</p>
+      <div class="facts">
+        <div class="fact"><small>DESTINO DESTACADO</small><strong>${c.city}</strong></div>
+        <div class="fact"><small>PARA PROBAR</small><strong>${c.food}</strong></div>
+        <div class="fact"><small>RECUERDOS</small><strong>${c.gift}</strong></div>
+      </div>
+      <button class="button" id="exploreGifts">Ver recuerdos ↓</button>
+    </div>`;
+
+  document.querySelectorAll(".country-tab").forEach(b=>{
+    b.classList.toggle("active",b.dataset.country===key);
+  });
+
+  $("exploreGifts").addEventListener("click",()=>$("giftGrid").scrollIntoView({behavior:"smooth",block:"center"}));
+  renderGifts();
+}
+
+function renderGifts(){
+  const c=countries[currentCountry];
+  const search=$("giftSearch").value.trim().toLowerCase();
+  const gifts=c.gifts.filter(g=>g.join(" ").toLowerCase().includes(search));
+
+  if(!gifts.length){
+    $("giftGrid").innerHTML="<p>No encontramos recuerdos con esa búsqueda.</p>";
+    return;
+  }
+
+  $("giftGrid").innerHTML=gifts.map((g,i)=>`
+    <article class="product-card">
+      <div class="product-image"><span class="product-emoji" aria-hidden="true">${g[2]}</span></div>
+      <div class="product-body">
+        <span class="tag">RECUERDO DE ${c.name.toUpperCase()}</span>
+        <h3>${g[0]}</h3>
+        <p>${g[1]}</p>
+        <div class="product-bottom">
+          <span class="product-price">${money(g[3])}</span>
+          <button class="add-button" data-gift="${i}" aria-label="Agregar ${g[0]}">+</button>
+        </div>
+      </div>
+    </article>`).join("");
+
+  document.querySelectorAll("[data-gift]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      const g=gifts[Number(button.dataset.gift)];
+      addToCart({
+        id:"gift-"+currentCountry+"-"+g[0],
+        name:g[0],price:g[3],type:"Recuerdo de "+c.name
+      });
+      notify("¡Recuerdo agregado al carrito! 🎁");
+    });
+  });
+}
+
+function addToCart(product){
+  const found=cart.find(item=>item.id===product.id);
+  if(found) found.quantity++;
+  else cart.push({...product,quantity:1});
+  renderCart();
+}
+
+function changeQuantity(id,change){
+  const item=cart.find(p=>p.id===id);
+  if(!item)return;
+  item.quantity+=change;
+  if(item.quantity<=0)cart=cart.filter(p=>p.id!==id);
+  renderCart();
+}
+
+function renderCart(){
+  const count=cart.reduce((sum,item)=>sum+item.quantity,0);
+  const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
+  $("cartCount").textContent=count;
+  $("summaryTotal").textContent=money(total);
+
+  if(!cart.length){
+    $("cartItems").innerHTML="<p>Tu carrito está vacío. ¡Explorá los destinos!</p>";
+    return;
+  }
+
+  $("cartItems").innerHTML=cart.map(item=>`
+    <article class="cart-row">
+      <div>
+        <h4>${item.name}</h4>
+        <small>${item.type||"Tu selección viajera"}</small>
+        <div class="cart-controls">
+          <button data-minus="${item.id}" aria-label="Restar">−</button>
+          <strong>${item.quantity}</strong>
+          <button data-plus="${item.id}" aria-label="Sumar">+</button>
+          <button class="remove" data-remove="${item.id}">Eliminar</button>
+        </div>
+      </div>
+      <strong>${money(item.price*item.quantity)}</strong>
+    </article>`).join("");
+
+  document.querySelectorAll("[data-minus]").forEach(b=>b.addEventListener("click",()=>changeQuantity(b.dataset.minus,-1)));
+  document.querySelectorAll("[data-plus]").forEach(b=>b.addEventListener("click",()=>changeQuantity(b.dataset.plus,1)));
+  document.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{
+    cart=cart.filter(item=>item.id!==b.dataset.remove);
+    renderCart();
+    notify("Producto eliminado del carrito.");
+  }));
+}
+
+// BUSCADOR DE VUELOS: precios ficticios para la demostración.
+$("flightForm").addEventListener("submit",event=>{
+  event.preventDefault();
+
+  const origin=$("origin").value.trim();
+  const destination=$("destination").value.trim();
+  const departure=$("departure").value;
+  const returnDate=$("returnDate").value;
+  const passengers=Number($("passengers").value);
+
+  if(returnDate&&returnDate<departure){
+    notify("La vuelta no puede ser anterior a la ida.");
+    return;
+  }
+
+  let base=450000;
+  const place=destination.toLowerCase();
+
+  if(/tokio|jap[oó]n/.test(place))base=980000;
+  else if(/roma|italia/.test(place))base=870000;
+  else if(/r[ií]o|brasil/.test(place))base=320000;
+  else if(/par[ií]s|francia/.test(place))base=920000;
+  else if(/bariloche|argentina/.test(place))base=150000;
+
+  const flights=[
+    {name:"NOVA Air · Directo",factor:1,time:"08:35"},
+    {name:"Cloudline · Flexible",factor:.88,time:"14:20"},
+    {name:"Skyway · Confort",factor:1.16,time:"20:10"}
+  ];
+
+  $("flightResults").innerHTML=`
+    <h3>Opciones de ejemplo: ${origin} → ${destination}</h3>
+    ${flights.map((f,i)=>`
+      <div class="result">
+        <div><strong>✈ ${f.name}</strong>
+          <small>Salida ${f.time} · ${departure}${returnDate?" · Vuelta: "+returnDate:""} · ${passengers} pasajero(s)</small>
+        </div>
+        <div><strong>${money(base*f.factor*passengers)}</strong>
+          <button class="button" data-flight="${i}">Agregar</button>
+        </div>
+      </div>`).join("")}
+    <small>Precios de muestra, no consultados en aerolíneas reales.</small>`;
+
+  document.querySelectorAll("[data-flight]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      const f=flights[Number(button.dataset.flight)];
+      addToCart({
+        id:"flight-"+destination+"-"+f.name,
+        name:"Vuelo a "+destination+" · "+f.name,
+        price:Math.round(base*f.factor*passengers),
+        type:"Desde "+origin+" · "+passengers+" pasajero(s)"
+      });
+      notify("Vuelo de demostración agregado ✈");
+    });
+  });
+});
+
+// PAQUETE PERSONALIZADO
+function updateTripTotal(){
+  const flight=Number($("flightType").value);
+  const hotel=Number($("hotelType").value);
+  const nights=Math.max(1,Math.min(30,Number($("nights").value)||1));
+  const activity=Number($("activityType").value);
+  const total=flight+hotel*nights+activity;
+  $("tripTotal").textContent=money(total);
+  return total;
+}
+
+["flightType","hotelType","nights","activityType"].forEach(id=>{
+  $(id).addEventListener("input",updateTripTotal);
+});
+
+$("tripForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  const destination=$("tripDestination").value;
+  addToCart({
+    id:"package-"+destination,
+    name:"Paquete personalizado a "+destination,
+    price:updateTripTotal(),
+    type:"Vuelo + alojamiento + actividad"
+  });
+  notify("¡Tu paquete se agregó al carrito! 🧳");
+});
+
+// LISTA DE VALIJA
+$("makePacking").addEventListener("click",()=>{
+  const days=Math.max(1,Math.min(60,Number($("packDays").value)||1));
+  const weather=$("weather").value;
+
+  const basics=[
+    "Documento de identidad o pasaporte",
+    "Pasajes y reservas",
+    "Celular y cargador",
+    "Artículos de higiene",
+    "Ropa interior ("+days+" mudas)",
+    "Medias ("+days+" pares)",
+    "Zapatillas cómodas"
+  ];
+
+  const clothes={
+    calor:["Remeras livianas","Shorts","Traje de baño","Protector solar"],
+    frio:["Campera abrigada","Buzo o sweater","Bufanda y gorro","Calzado cerrado"],
+    lluvia:["Piloto impermeable","Paraguas","Calzado resistente al agua","Bolsa impermeable"],
+    templado:["Campera liviana","Pantalones cómodos","Una muda extra","Zapatillas cómodas"]
+  };
+
+  $("packingList").innerHTML=[...basics,...clothes[weather]].map(item=>`
+    <label class="packing-item"><input type="checkbox"><span>${item}</span></label>
+  `).join("");
+
+  document.querySelectorAll(".packing-item input").forEach(check=>{
+    check.addEventListener("change",()=>check.parentElement.classList.toggle("checked",check.checked));
+  });
+});
+
+// CALCULADORA DE PRESUPUESTO
+function updateBudget(){
+  const ids=["budgetHotel","budgetFood","budgetTransport","budgetActivities"];
+  const total=ids.reduce((sum,id)=>sum+Math.max(0,Number($(id).value)||0),0);
+  $("budgetTotal").textContent=money(total);
+}
+document.querySelectorAll(".budget-input").forEach(input=>input.addEventListener("input",updateBudget));
+
+// CUENTA REGRESIVA
+function updateCountdown(){
+  const date=$("countdownDate").value;
+  if(!date){
+    $("countDays").textContent="--";
+    $("countHours").textContent="--";
+    $("countMinutes").textContent="--";
+    $("countdownMessage").textContent="Elegí una fecha para comenzar la cuenta regresiva ✨";
+    return;
+  }
+
+  const target=new Date(date+"T00:00:00").getTime();
+  const difference=target-Date.now();
+
+  if(difference<=0){
+    $("countDays").textContent="0";
+    $("countHours").textContent="0";
+    $("countMinutes").textContent="0";
+    $("countdownMessage").textContent="¡Llegó el momento de tu aventura! 🎉";
+    return;
+  }
+
+  const minutes=Math.floor(difference/60000);
+  $("countDays").textContent=Math.floor(minutes/1440);
+  $("countHours").textContent=Math.floor((minutes%1440)/60);
+  $("countMinutes").textContent=minutes%60;
+  $("countdownMessage").textContent="Cada día te acerca más a tu destino ✨";
+}
+$("countdownDate").addEventListener("change",updateCountdown);
+
+// CONTINUAR CON EL CARRITO: no realiza pagos.
+$("checkoutButton").addEventListener("click",()=>{
+  if(!cart.length){
+    $("cartMessage").textContent="Tu carrito está vacío. Primero agregá un producto o paquete.";
+  }else{
+    $("cartMessage").textContent="¡Listo! Esta es una simulación escolar. No se realizará ningún pago.";
+  }
+});
+
+// CAMBIAR DE PAÍS Y BUSCAR REGALOS
+document.querySelectorAll(".country-tab").forEach(button=>{
+  button.addEventListener("click",()=>renderCountry(button.dataset.country));
+});
+$("giftSearch").addEventListener("input",renderGifts);
+
+// CONFIGURACIÓN INICIAL
+const today=new Date();
+const todayString=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+$("departure").min=todayString;
+$("returnDate").min=todayString;
+$("countdownDate").min=todayString;
+
+$("departure").value=todayString;
+$("returnDate").addEventListener("change",()=>{
+  $("returnDate").min=$("departure").value||todayString;
+});
+
+renderCountry("japon");
+renderCart();
+updateTripTotal();
+updateBudget();
+updateCountdown();
+</script>
+</body>
+</html>
